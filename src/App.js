@@ -5,42 +5,49 @@ import { useState } from 'react';
 function App() {
 
   const [slides, setSlides] = useState(sliderElements);
-  const [showedSlidersPosition, setShowedSlidersPosition] = useState()
-  const [moveLeft, setMoveLeft] = useState(false)
-  const [moveRight, setMoveRight] = useState(true)
+  const [position, setPosition] = useState(0);
 
   const sliderOptions = {
     width: 200,
     gap: 20,
-    step: 3
-
+    step: 3,
+    max: 7
   }
 
   const slideLeft = () => {
+    if (position <= 0) {
+      setPosition(position => position = 0);
 
-    setSlides(slides => (slides.slice(2, slides.length)));
-    console.log(slides);
-    setSlides(slides => (slides.push([slides[0], slides[1]])));
+    }
+    else {
+      setPosition(position => position - 3);
+
+    }
 
   }
   const slideRight = () => {
-    setSlides(slides => (slides.splice(slides.length, 1)))
-    console.log(slides);
+    if (position >= slides.length + 1) {
+      setPosition(position => position = slides.length);
+
+    }
+    else {
+      setPosition(position => position + 3);
+
+    }
   }
 
-  const handleClick = event => event.target.classList.add('click-state');
+  console.log(position);
 
   return (
     <div className="App">
       <div className='slider-wrapper'>
-        <button className='slider-btn btn-left' onClick={slideLeft}>&#8592;</button>
+        <button className='slider-btn btn-left' onClick={slideLeft} disabled={position === 0}>&#8592;</button>
         <div className='slider'>
-          {slides.map((item, index) => {
-            return <SlideElement key={index} header={item.header} image={item.image} text={item.text} handleClick={handleClick} moveLeft={moveLeft} moveRight={moveRight} />
+          {[slides[position], slides[position + 1], slides[position + 2]].map((item, index) => {
+            return <SlideElement key={index} header={item.header} image={item.image} text={item.text} />
           })}
         </div>
-        <button className='slider-btn btn-right' onClick={slideRight}> &#8594;</button>
-
+        <button className='slider-btn btn-right' onClick={slideRight} disabled={position === 6}> &#8594;</button>
       </div>
 
     </div >

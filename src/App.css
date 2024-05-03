@@ -7,8 +7,7 @@
   justify-content: center;
   margin: 100px;
   position: relative;
-  height: 300px;
-  border: 1px solid green;
+  height: auto;
 }
 .slider {
   width: 660px;
@@ -20,18 +19,22 @@
   border: 1px solid pink;
   position: relative;
 }
-
 .slider-img {
+  display: flex;
+  flex-direction: column;
+}
+.slider-img img {
+  margin-top: 25px;
 }
 .slider-text-bg {
   box-sizing: border-box;
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   left: 0;
-  background-color: lightblue;
+  background-color: pink;
   opacity: 0.8;
   width: 200px;
-  height: 120px;
+  height: 200px;
   z-index: 3;
 }
 .slider-text {
@@ -53,13 +56,7 @@
   margin: 0 30px;
   font-size: 24px;
 }
+
 .slider-btn:hover {
   color: pink;
-}
-
-.moveLeft {
-  transform: translateX(440px);
-}
-.moveRight {
-  transform: translateX(-440px);
 }
